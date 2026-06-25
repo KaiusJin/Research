@@ -1,0 +1,15 @@
+[submodule "datasets/InsPLAD"]
+	path = datasets/InsPLAD
+	url = https://github.com/andreluizbvs/InsPLAD.git
+[submodule "datasets/SteelDefectX"]
+	path = datasets/SteelDefectX
+	url = https://github.com/Zhaosxian/SteelDefectX.git
+[submodule "datasets/SteelBlastQC"]
+	path = datasets/SteelBlastQC
+	url = https://github.com/ERNIS-LAB/SteelBlastQC.git
+[submodule "datasets/MMR"]
+	path = datasets/MMR
+	url = https://github.com/zhangzilongc/MMR.git
+[submodule "datasets/Aoi-overfitting-team"]
+	path = datasets/Aoi-overfitting-team
+	url = https://github.com/love6tao/Aoi-overfitting-team.git
