@@ -26,14 +26,22 @@ VISION reference implementation: [Aoi-overfitting-team](https://github.com/love6
 
 ## AFL Linear Readout
 
-The current AFL experiment uses a frozen ImageNet backbone and a single-round analytic federated linear classifier.
+The audited AFL benchmark uses frozen ImageNet backbones and a single-round analytic federated linear classifier. ResNet-50 uses its complete 2,048-dimensional representation; DeiT-S uses its native 384-dimensional representation. No random projection is applied.
 
-| Backbone | AFL test Accuracy | Centralized Accuracy | AFL/central relative error |
-|---|---:|---:|---:|
-| ResNet-50 | 93.50% | 93.50% | 7.50e-14 |
-| DeiT-S | 94.51% | 94.51% | 1.30e-10 |
+| Dataset | Backbone | Accuracy | Balanced Accuracy | Macro-F1 |
+|---|---|---:|---:|---:|
+| InsPLAD, mean over five official asset tasks | ResNet-50 | 91.62% | 87.64% | 82.85% |
+| InsPLAD, mean over five official asset tasks | DeiT-S | 91.94% | 89.55% | 81.77% |
+| SteelDefectX | ResNet-50 | 94.58% | 90.87% | 92.25% |
+| SteelDefectX | DeiT-S | 95.01% | 90.57% | 92.34% |
+| SteelBlastQC | ResNet-50 | 83.60% | 82.29% | 82.83% |
+| SteelBlastQC | DeiT-S | 94.80% | 94.20% | 94.67% |
 
-Protocol: official supervised InsPLAD train/validation split, an 11-class asset/state label space, five clients, Dirichlet alpha 0.1, gamma 1, and L2-normalized frozen features. ResNet-50 features are projected from 2,048 to 384 dimensions using a fixed data-independent Gaussian projection; DeiT-S uses its native 384-dimensional representation. These are custom AFL linear-readout results, not results reported by the original dataset authors.
+Protocol: five clients, Dirichlet alpha 0.1, gamma 1, seed 7, L2-normalized frozen features, AA Law aggregation, and RI recovery. AFL and centralized analytic classifiers agree to less than `1e-8` relative weight error in all 14 runs.
+
+AeBAD is not evaluated because its official anomaly-detection training split contains only normal samples, which cannot train the supervised AFL linear classifier without changing the protocol. VISION is not evaluated because its official task is instance segmentation/limited-label detection rather than single-label image classification.
+
+See [AFL_industrial_linear_readout_report.md](AFL_industrial_linear_readout_report.md) for the complete protocol and per-task results. Reproduction code and audited JSON outputs are published in [KaiusJin/AFL_Reproduction](https://github.com/KaiusJin/AFL_Reproduction).
 
 ## Repository Layout
 
@@ -41,6 +49,7 @@ Protocol: official supervised InsPLAD train/validation split, an 11-class asset/
 CraneLab/
 ├── README.md
 ├── CraneLab_datasets_technical_report.md
+├── AFL_industrial_linear_readout_report.md
 ├── InsPLAD/
 ├── SteelDefectX/
 ├── SteelBlastQC/
