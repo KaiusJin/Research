@@ -1,0 +1,12 @@
+.DS_Store
+.env
+data/
+*.zip
+*.tar
+*.tar.gz
+*.part
+*.incomplete
+manifests/
+results/
+__pycache__/
+*.pyc
